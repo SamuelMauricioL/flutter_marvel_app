@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/core/theme/palette.dart';
+import 'package:flutter_marvel_app/core/widgets/marvel_scaffold.dart';
+import 'package:flutter_marvel_app/feature/home/presentation/widgets/home_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage._();
@@ -8,12 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-        backgroundColor: Palette.neutralDarkest,
-        body: HomeView(),
-      ),
-    );
+    return const HomeView();
   }
 }
 
@@ -22,8 +18,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home'),
+    return const MarvelScaffold(
+      body: HomeCard(),
     );
   }
 }
