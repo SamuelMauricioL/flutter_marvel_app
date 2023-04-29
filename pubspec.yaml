@@ -21,3 +21,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Alliance
+      fonts:
+        - asset: assets/fonts/AllianceLight.otf
+        - asset: assets/fonts/AllianceRegular.otf
+        - asset: assets/fonts/AllianceBold.otf
+
+    - family: Neue
+      fonts:
+        - asset: assets/fonts/NeueMachina-Light.otf
+        - asset: assets/fonts/NeueMachina-Medium.otf
+        - asset: assets/fonts/NeueMachina-Regular.otf
+        - asset: assets/fonts/NeueMachina-Bold.otf
+        - asset: assets/fonts/NeueMachina-Black.otf
+        - asset: assets/fonts/NeueMachina-Ultrabold.otf
+        - asset: assets/fonts/NeueMachina-Ultralight.otf
