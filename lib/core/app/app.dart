@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel_app/core/app/navigator.dart';
 import 'package:flutter_marvel_app/core/theme/palette.dart';
 
 class App extends StatelessWidget {
@@ -19,8 +20,8 @@ class App extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      // navigatorKey: AppNavigator.navigatorKey,
-      // onGenerateRoute: AppNavigator.onGenerateRoute,
+      navigatorKey: AppNavigator.navigatorKey,
+      onGenerateRoute: AppNavigator.onGenerateRoute,
     );
   }
 }
