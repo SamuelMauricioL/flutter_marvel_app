@@ -14,7 +14,7 @@ class CenterApi {
           await http.get(Uri.parse(urlSpecific), headers: _headers);
 
       final dataDecode = response.body != ''
-          ? AppUtils.instance.getDataDecode(response.bodyBytes)
+          ? AppUtils.instance.getDataDecode(response.body)
           : [];
 
       if (response.statusCode >= 200 && response.statusCode <= 299) {

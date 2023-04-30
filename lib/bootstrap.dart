@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_marvel_app/core/storage/storage.dart';
+import 'package:flutter_marvel_app/core/app/injection_container.dart' as di;
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -36,10 +37,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
         DeviceOrientation.portraitDown,
       ]);
 
-      // Initialize Store
-      await Storage.init();
+      await di.init();
+      await Storage().init();
 
-      // TODO: create dependency injection
       runApp(await builder());
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
