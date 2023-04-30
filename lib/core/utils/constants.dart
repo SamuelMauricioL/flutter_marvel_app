@@ -5,16 +5,16 @@ abstract class AppConstant {
   static const String error = "Ha ocurrido un error";
 }
 
-List<String> images = [
-  "assets/images/spiderman.jpg",
-  "assets/images/superman.jpeg",
-  "assets/images/thedarkknightrises.jpg",
-  "assets/images/aquaman.jpg",
-];
+// List<String> images = [
+//   "assets/images/spiderman.jpg",
+//   "assets/images/superman.jpeg",
+//   "assets/images/thedarkknightrises.jpg",
+//   "assets/images/aquaman.jpg",
+// ];
 
-List<String> title = [
-  "Spiderman",
-  "Superman",
-  "The Dark Knight Rises",
-  "Aquaman",
-];
+// List<String> title = [
+//   "Spiderman",
+//   "Superman",
+//   "The Dark Knight Rises",
+//   "Aquaman",
+// ];

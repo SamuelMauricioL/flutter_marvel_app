@@ -1,17 +1,22 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/core/utils/constants.dart';
+// import 'package:flutter_marvel_app/core/utils/constants.dart';
 
 class MarvelCardScroll extends StatelessWidget {
+  final List<String> imagesUrl;
+  final List<String> titles;
   final double currentPage;
   final double padding;
   final double verticalInset;
-  const MarvelCardScroll(
-      {required this.currentPage,
-      this.padding = 20.0,
-      this.verticalInset = 20.0,
-      super.key});
+  const MarvelCardScroll({
+    required this.imagesUrl,
+    required this.titles,
+    required this.currentPage,
+    this.padding = 20.0,
+    this.verticalInset = 20.0,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +41,7 @@ class MarvelCardScroll extends StatelessWidget {
 
           List<Widget> cardList = [];
 
-          for (var i = 0; i < images.length; i++) {
+          for (var i = 0; i < imagesUrl.length; i++) {
             double delta = i - currentPage;
             bool isOnRight = delta > 0;
 
@@ -69,7 +74,7 @@ class MarvelCardScroll extends StatelessWidget {
                     child: Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
-                        Image.asset(images[i], fit: BoxFit.cover),
+                        Image.network(imagesUrl[i], fit: BoxFit.cover),
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Column(
@@ -79,7 +84,7 @@ class MarvelCardScroll extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16.0, vertical: 8.0),
-                                child: Text(title[i],
+                                child: Text(titles[i],
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 25.0,
