@@ -15,3 +15,12 @@ class GetComics extends DetailEvent {
   @override
   List<Object> get props => [id];
 }
+
+class GetEvents extends DetailEvent {
+  const GetEvents(this.id);
+
+  final String id;
+
+  @override
+  List<Object> get props => [id];
+}

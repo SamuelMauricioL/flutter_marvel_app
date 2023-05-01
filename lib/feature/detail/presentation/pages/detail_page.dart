@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_marvel_app/core/app/injection_container.dart';
 import 'package:flutter_marvel_app/feature/detail/presentation/bloc/detail_bloc.dart';
 import 'package:flutter_marvel_app/feature/detail/presentation/widgets/detail_app_bar.dart';
-import 'package:flutter_marvel_app/feature/detail/presentation/widgets/detail_comics.dart';
+import 'package:flutter_marvel_app/feature/detail/presentation/widgets/detail_card_section.dart';
 import 'package:flutter_marvel_app/feature/detail/presentation/widgets/detail_description.dart';
 import 'package:flutter_marvel_app/feature/home/domain/entities/hero_entity.dart';
 
@@ -17,7 +17,9 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<DetailBloc>()..add(GetComics(hero.id.toString())),
+      create: (_) => sl<DetailBloc>()
+        ..add(GetComics(hero.id.toString()))
+        ..add(GetEvents(hero.id.toString())),
       child: DetailView(hero: hero),
     );
   }
@@ -88,8 +90,14 @@ class _DetailViewState extends State<DetailView> {
                 if (state.status == DetailStatus.loading) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
-                return DetailComics(comics: state.comics);
+                return DetailCardSection(title: 'Comics', detail: state.comics);
+              }),
+              const SizedBox(height: 20),
+              BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
+                if (state.status == DetailStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return DetailCardSection(title: 'Events', detail: state.events);
               }),
             ],
           ),
