@@ -6,6 +6,7 @@ abstract class DetailRemoteDataSource {
   Future<List<DetailModel>> getComics(String id);
   Future<List<DetailModel>> getEvents(String id);
   Future<List<DetailModel>> getSeries(String id);
+  Future<List<DetailModel>> getStories(String id);
 }
 
 class DetailRemoteDataSourceImpl extends DetailRemoteDataSource {
@@ -26,6 +27,11 @@ class DetailRemoteDataSourceImpl extends DetailRemoteDataSource {
   @override
   Future<List<DetailModel>> getSeries(String id) async {
     return await _getDetail(Endpoints.getSeries(id));
+  }
+
+  @override
+  Future<List<DetailModel>> getStories(String id) async {
+    return await _getDetail(Endpoints.getStories(id));
   }
 
   Future<List<DetailModel>> _getDetail(String endpoint) async {

@@ -6,6 +6,7 @@ import 'package:flutter_marvel_app/feature/detail/data/models/detail_model.dart'
 const CACHED_COMICS = 'CACHED_COMICS';
 const CACHED_EVENTS = 'CACHED_EVENTS';
 const CACHED_SERIES = 'CACHED_SERIES';
+const CACHED_STORIES = 'CACHED_STORIES';
 
 abstract class DetailLocalDataSource {
   void cacheComics(List<DetailModel> heroes);
@@ -16,6 +17,9 @@ abstract class DetailLocalDataSource {
 
   void cacheSeries(List<DetailModel> heroes);
   Future<List<DetailModel>> getLastSeries();
+
+  void cacheStories(List<DetailModel> heroes);
+  Future<List<DetailModel>> getLastStories();
 }
 
 class DetailLocalDataSourceImpl extends DetailLocalDataSource {
@@ -46,6 +50,14 @@ class DetailLocalDataSourceImpl extends DetailLocalDataSource {
   @override
   Future<List<DetailModel>> getLastSeries() async =>
       _getLastDetail(CACHED_SERIES);
+
+  @override
+  void cacheStories(List<DetailModel> heroes) =>
+      _cacheDetail(CACHED_STORIES, heroes);
+
+  @override
+  Future<List<DetailModel>> getLastStories() async =>
+      _getLastDetail(CACHED_STORIES);
 
   void _cacheDetail(String key, List<DetailModel> heroes) =>
       storage.write(key, detailsModelToJson(heroes));

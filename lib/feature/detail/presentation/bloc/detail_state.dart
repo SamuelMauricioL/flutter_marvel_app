@@ -12,6 +12,7 @@ class DetailState extends Equatable {
   final List<DetailEntity> comics;
   final List<DetailEntity> events;
   final List<DetailEntity> series;
+  final List<DetailEntity> stories;
   final String error;
 
   const DetailState({
@@ -19,17 +20,19 @@ class DetailState extends Equatable {
     this.comics = const [],
     this.events = const [],
     this.series = const [],
+    this.stories = const [],
     this.error = '',
   });
 
   @override
-  List<Object> get props => [status, comics, events, series, error];
+  List<Object> get props => [status, comics, events, series, stories, error];
 
   DetailState copyWith({
     DetailStatus? status,
     List<DetailEntity>? comics,
     List<DetailEntity>? events,
     List<DetailEntity>? series,
+    List<DetailEntity>? stories,
     String? error,
   }) {
     return DetailState(
@@ -37,6 +40,7 @@ class DetailState extends Equatable {
       comics: comics ?? this.comics,
       events: events ?? this.events,
       series: series ?? this.series,
+      stories: stories ?? this.stories,
       error: error ?? this.error,
     );
   }
