@@ -9,6 +9,7 @@ import 'package:oxidized/oxidized.dart';
 abstract class DetailRepository {
   Future<Result<List<DetailEntity>, Failure>> getComics(String id);
   Future<Result<List<DetailEntity>, Failure>> getEvents(String id);
+  Future<Result<List<DetailEntity>, Failure>> getSeries(String id);
 }
 
 class DetailRepositoryImpl extends DetailRepository {
@@ -36,6 +37,17 @@ class DetailRepositoryImpl extends DetailRepository {
     try {
       final data = await remoteDataSource.getEvents(id);
       localDataSource.cacheEvents(data);
+      return Result.ok(data.map((m) => m.toEntity()).toList());
+    } on CacheException catch (_) {
+      return Result.err(CacheFailure());
+    }
+  }
+
+  @override
+  Future<Result<List<DetailEntity>, Failure>> getSeries(String id) async {
+    try {
+      final data = await remoteDataSource.getSeries(id);
+      localDataSource.cacheSeries(data);
       return Result.ok(data.map((m) => m.toEntity()).toList());
     } on CacheException catch (_) {
       return Result.err(CacheFailure());

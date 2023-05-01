@@ -19,7 +19,8 @@ class DetailPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => sl<DetailBloc>()
         ..add(GetComics(hero.id.toString()))
-        ..add(GetEvents(hero.id.toString())),
+        ..add(GetEvents(hero.id.toString()))
+        ..add(GetSeries(hero.id.toString())),
       child: DetailView(hero: hero),
     );
   }
@@ -98,6 +99,13 @@ class _DetailViewState extends State<DetailView> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 return DetailCardSection(title: 'Events', detail: state.events);
+              }),
+              const SizedBox(height: 20),
+              BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
+                if (state.status == DetailStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return DetailCardSection(title: 'Series', detail: state.series);
               }),
             ],
           ),

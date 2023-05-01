@@ -24,3 +24,12 @@ class GetEvents extends DetailEvent {
   @override
   List<Object> get props => [id];
 }
+
+class GetSeries extends DetailEvent {
+  const GetSeries(this.id);
+
+  final String id;
+
+  @override
+  List<Object> get props => [id];
+}

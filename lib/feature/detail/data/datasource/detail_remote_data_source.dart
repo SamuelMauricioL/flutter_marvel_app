@@ -5,6 +5,7 @@ import 'package:flutter_marvel_app/feature/detail/data/models/detail_model.dart'
 abstract class DetailRemoteDataSource {
   Future<List<DetailModel>> getComics(String id);
   Future<List<DetailModel>> getEvents(String id);
+  Future<List<DetailModel>> getSeries(String id);
 }
 
 class DetailRemoteDataSourceImpl extends DetailRemoteDataSource {
@@ -20,6 +21,11 @@ class DetailRemoteDataSourceImpl extends DetailRemoteDataSource {
   @override
   Future<List<DetailModel>> getEvents(String id) async {
     return await _getDetail(Endpoints.getEvents(id));
+  }
+
+  @override
+  Future<List<DetailModel>> getSeries(String id) async {
+    return await _getDetail(Endpoints.getSeries(id));
   }
 
   Future<List<DetailModel>> _getDetail(String endpoint) async {
