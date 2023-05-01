@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_marvel_app/core/storage/secure_storage.dart';
+import 'package:flutter_marvel_app/core/storage/set_defaul_credentials.dart';
 import 'package:flutter_marvel_app/core/storage/storage.dart';
 import 'package:flutter_marvel_app/core/app/injection_container.dart' as di;
 
@@ -39,6 +41,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
       await di.init();
       await Storage().init();
+      await setDefaultCredentials(di.sl<SecureStorage>());
 
       runApp(await builder());
     },

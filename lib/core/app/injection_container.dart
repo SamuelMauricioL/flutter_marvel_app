@@ -1,5 +1,7 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_marvel_app/core/service/center_api.dart';
+import 'package:flutter_marvel_app/core/service/security.dart';
+import 'package:flutter_marvel_app/core/storage/secure_storage.dart';
 import 'package:flutter_marvel_app/core/storage/storage.dart';
 import 'package:flutter_marvel_app/feature/detail/data/datasource/detail_local_data_source.dart';
 import 'package:flutter_marvel_app/feature/detail/data/datasource/detail_remote_data_source.dart';
@@ -57,15 +59,17 @@ init() {
   //=======================
   // Network
   //=======================
-  sl.registerLazySingleton<CenterApi>(() => CenterApi());
+  sl.registerLazySingleton<CenterApi>(() => CenterApi(sl()));
 
   //=======================
   // Storage
   //=======================
   sl.registerLazySingleton<Storage>(() => Storage());
+  sl.registerFactory(() => const SecureStorage());
 
   //=======================
   // Services
   //=======================
   sl.registerLazySingleton<CacheManager>(() => DefaultCacheManager());
+  sl.registerFactory(() => Security(storage: sl()));
 }
