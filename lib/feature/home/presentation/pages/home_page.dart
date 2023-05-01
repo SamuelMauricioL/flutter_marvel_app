@@ -31,35 +31,9 @@ class HomeView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: const Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    onPressed: () {},
-                  )
-                ],
-              ),
-              const Text(
-                "Marvel",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 35.0,
-                  fontFamily: "Calibre-Semibold",
-                  letterSpacing: 1.0,
-                ),
+              Image.asset(
+                "assets/gifs/marvel_intro.gif",
+                width: 250.0,
               ),
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
