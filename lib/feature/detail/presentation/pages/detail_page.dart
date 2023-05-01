@@ -82,42 +82,28 @@ class _DetailViewState extends State<DetailView> {
         },
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              DetailDescription(description: widget.hero.description),
-              const SizedBox(height: 20),
-              BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
-                if (state.status == DetailStatus.loading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return DetailCardSection(title: 'Comics', detail: state.comics);
-              }),
-              const SizedBox(height: 20),
-              BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
-                if (state.status == DetailStatus.loading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return DetailCardSection(title: 'Events', detail: state.events);
-              }),
-              const SizedBox(height: 20),
-              BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
-                if (state.status == DetailStatus.loading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return DetailCardSection(title: 'Series', detail: state.series);
-              }),
-              const SizedBox(height: 20),
-              BlocBuilder<DetailBloc, DetailState>(builder: (context, state) {
-                if (state.status == DetailStatus.loading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return DetailCardSection(
-                    title: 'Stories', detail: state.stories);
-              }),
-              const SizedBox(height: 50),
-            ],
+          child: BlocBuilder<DetailBloc, DetailState>(
+            builder: (context, state) {
+              if (state.status == DetailStatus.loading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  DetailDescription(description: widget.hero.description),
+                  const SizedBox(height: 20),
+                  DetailCardSection(title: 'Comics', detail: state.comics),
+                  const SizedBox(height: 20),
+                  DetailCardSection(title: 'Events', detail: state.events),
+                  const SizedBox(height: 20),
+                  DetailCardSection(title: 'Series', detail: state.series),
+                  const SizedBox(height: 20),
+                  DetailCardSection(title: 'Stories', detail: state.stories),
+                  const SizedBox(height: 50),
+                ],
+              );
+            },
           ),
         ),
       ),
