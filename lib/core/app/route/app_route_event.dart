@@ -10,9 +10,11 @@ abstract class AppRouteEvent extends Equatable {
 class ChangedTo extends AppRouteEvent {
   const ChangedTo({
     required this.page,
+    this.arguments = '',
   });
 
   final AppRoutes page;
+  final String arguments;
 
   @override
   List<Object?> get props => [];

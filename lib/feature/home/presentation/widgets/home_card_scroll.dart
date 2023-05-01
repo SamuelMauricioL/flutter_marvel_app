@@ -1,17 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-// import 'package:flutter_marvel_app/core/utils/constants.dart';
+import 'package:flutter_marvel_app/feature/home/domain/entities/hero_entity.dart';
 
-class MarvelCardScroll extends StatelessWidget {
-  final List<String> imagesUrl;
-  final List<String> titles;
+class HomeCardScroll extends StatelessWidget {
+  final List<HeroEntity> heroes;
   final double currentPage;
   final double padding;
   final double verticalInset;
-  const MarvelCardScroll({
-    required this.imagesUrl,
-    required this.titles,
+  const HomeCardScroll({
+    required this.heroes,
     required this.currentPage,
     this.padding = 20.0,
     this.verticalInset = 20.0,
@@ -41,7 +39,7 @@ class MarvelCardScroll extends StatelessWidget {
 
           List<Widget> cardList = [];
 
-          for (var i = 0; i < imagesUrl.length; i++) {
+          for (var i = 0; i < heroes.length; i++) {
             double delta = i - currentPage;
             bool isOnRight = delta > 0;
 
@@ -74,7 +72,7 @@ class MarvelCardScroll extends StatelessWidget {
                     child: Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
-                        Image.network(imagesUrl[i], fit: BoxFit.cover),
+                        Image.network(heroes[i].imageUrl, fit: BoxFit.cover),
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Column(
@@ -84,10 +82,19 @@ class MarvelCardScroll extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16.0, vertical: 8.0),
-                                child: Text(titles[i],
+                                child: Text(heroes[i].name,
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 25.0,
+                                        fontFamily: "SF-Pro-Text-Regular")),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 8.0),
+                                child: Text(heroes[i].description,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15.0,
                                         fontFamily: "SF-Pro-Text-Regular")),
                               ),
                               const SizedBox(height: 10.0),
@@ -96,18 +103,23 @@ class MarvelCardScroll extends StatelessWidget {
                                   left: 12.0,
                                   bottom: 12.0,
                                 ),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 22.0,
-                                    vertical: 6.0,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blueAccent,
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: const Text(
-                                    "Watch Now",
-                                    style: TextStyle(color: Colors.white),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    print('=============> ${heroes[i].id}');
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 22.0,
+                                      vertical: 6.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.redAccent,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: const Text(
+                                      "See more",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                   ),
                                 ),
                               )

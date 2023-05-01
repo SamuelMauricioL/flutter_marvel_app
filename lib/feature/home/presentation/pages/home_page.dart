@@ -36,7 +36,7 @@ class HomeView extends StatelessWidget {
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(
-                      CustomIcons.menu,
+                      Icons.menu,
                       color: Colors.white,
                       size: 30.0,
                     ),
@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
                 ],
               ),
               const Text(
-                "Marvel Movie",
+                "Marvel",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 35.0,

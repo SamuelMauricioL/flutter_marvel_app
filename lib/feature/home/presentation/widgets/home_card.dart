@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_marvel_app/core/widgets/marvel_card_scroll.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_marvel_app/core/app/route/app_route_bloc.dart';
+import 'package:flutter_marvel_app/feature/home/presentation/widgets/home_card_scroll.dart';
 import 'package:flutter_marvel_app/feature/home/domain/entities/hero_entity.dart';
 
 class HomeCard extends StatefulWidget {
@@ -11,15 +13,11 @@ class HomeCard extends StatefulWidget {
 }
 
 class _HomeCardState extends State<HomeCard> {
-  late List<String> imagesUrl;
-  late List<String> heroesName;
   late double currentPage;
   late PageController controller;
 
   @override
   void initState() {
-    imagesUrl = widget.heroes.map((h) => h.imageUrl).toList();
-    heroesName = widget.heroes.map((h) => h.name).toList();
     currentPage = widget.heroes.length - 1.0;
     controller = PageController(initialPage: widget.heroes.length - 1);
     controller.addListener(() {
@@ -32,27 +30,34 @@ class _HomeCardState extends State<HomeCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        MarvelCardScroll(
-          currentPage: currentPage,
-          imagesUrl: imagesUrl,
-          titles: heroesName,
-        ),
-        Positioned.fill(
-          child: PageView.builder(
-            itemCount: widget.heroes.length,
-            controller: controller,
-            reverse: true,
-            itemBuilder: (context, index) => const SizedBox.shrink(),
+    return GestureDetector(
+      onTap: () {
+        final index = (controller.page!).round();
+        final heroId = widget.heroes[index].id.toString();
+
+        context.read<AppRouteBloc>().add(
+              ChangedTo(
+                page: AppRoutes.detail,
+                arguments: heroId,
+              ),
+            );
+      },
+      child: Stack(
+        children: <Widget>[
+          HomeCardScroll(
+            heroes: widget.heroes,
+            currentPage: currentPage,
           ),
-        ),
-      ],
+          Positioned.fill(
+            child: PageView.builder(
+              itemCount: widget.heroes.length,
+              controller: controller,
+              reverse: true,
+              itemBuilder: (context, index) => const SizedBox.shrink(),
+            ),
+          ),
+        ],
+      ),
     );
   }
-}
-
-class CustomIcons {
-  static const IconData menu = IconData(0xe900, fontFamily: "CustomIcons");
-  static const IconData option = IconData(0xe902, fontFamily: "CustomIcons");
 }

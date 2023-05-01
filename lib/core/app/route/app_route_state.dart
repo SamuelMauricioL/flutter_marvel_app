@@ -2,6 +2,7 @@ part of 'app_route_bloc.dart';
 
 enum AppRoutes {
   home,
+  detail,
   comics,
   events,
   series,
@@ -11,18 +12,22 @@ enum AppRoutes {
 class AppRouteState extends Equatable {
   const AppRouteState({
     this.page = AppRoutes.home,
+    this.arguments = '',
   });
 
   final AppRoutes page;
+  final String arguments;
 
   AppRouteState copyWith({
     AppRoutes? page,
+    String? arguments,
   }) {
     return AppRouteState(
       page: page ?? this.page,
+      arguments: arguments ?? this.arguments,
     );
   }
 
   @override
-  List<Object> get props => [page];
+  List<Object> get props => [page, arguments];
 }

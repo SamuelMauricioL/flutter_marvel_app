@@ -6,7 +6,7 @@ class Endpoints {
   static const String ts = "ts=1677784856";
 
   /// Full endpoints
-  static String getHeroes() => '$baseUrl?$apiKey&$hash&$ts';
+  static String getHeroes() => '$baseUrl?$apiKey&$hash&$ts&limit=100';
   static String getComics(String characterId) =>
       '$baseUrl/$characterId/comics?$apiKey&$hash&$ts';
   static String getEvents(String characterId) =>

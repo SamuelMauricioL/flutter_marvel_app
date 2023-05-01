@@ -14,7 +14,10 @@ class AppRouteBloc extends Bloc<AppRouteEvent, AppRouteState> {
     Emitter emit,
   ) {
     emit(
-      state.copyWith(page: event.page),
+      state.copyWith(
+        page: event.page,
+        arguments: event.arguments,
+      ),
     );
   }
 }
