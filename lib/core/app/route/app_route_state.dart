@@ -16,11 +16,11 @@ class AppRouteState extends Equatable {
   });
 
   final AppRoutes page;
-  final String arguments;
+  final Object arguments;
 
   AppRouteState copyWith({
     AppRoutes? page,
-    String? arguments,
+    Object? arguments,
   }) {
     return AppRouteState(
       page: page ?? this.page,

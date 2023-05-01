@@ -33,12 +33,12 @@ class _HomeCardState extends State<HomeCard> {
     return GestureDetector(
       onTap: () {
         final index = (controller.page!).round();
-        final heroId = widget.heroes[index].id.toString();
+        final hero = widget.heroes[index];
 
         context.read<AppRouteBloc>().add(
               ChangedTo(
                 page: AppRoutes.detail,
-                arguments: heroId,
+                arguments: hero,
               ),
             );
       },

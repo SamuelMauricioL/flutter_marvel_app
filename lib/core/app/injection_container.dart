@@ -1,5 +1,11 @@
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_marvel_app/core/service/center_api.dart';
 import 'package:flutter_marvel_app/core/storage/storage.dart';
+import 'package:flutter_marvel_app/feature/detail/data/datasource/detail_local_data_source.dart';
+import 'package:flutter_marvel_app/feature/detail/data/datasource/detail_remote_data_source.dart';
+import 'package:flutter_marvel_app/feature/detail/data/repositories/detail_repository.dart';
+import 'package:flutter_marvel_app/feature/detail/domain/usecases/get_comics.dart';
+import 'package:flutter_marvel_app/feature/detail/presentation/bloc/detail_bloc.dart';
 import 'package:flutter_marvel_app/feature/home/data/datasources/home_local_data_source.dart';
 import 'package:flutter_marvel_app/feature/home/data/datasources/home_remote_data_source.dart';
 import 'package:flutter_marvel_app/feature/home/data/repositories/home_repository.dart';
@@ -14,25 +20,33 @@ init() {
   // Blocs
   //=======================
   sl.registerFactory(() => HomeBloc(sl()));
+  sl.registerFactory(() => DetailBloc(sl()));
 
   //=======================
   // Use cases
   //=======================
   sl.registerLazySingleton(() => GetHeroesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetComicsUseCase(repository: sl()));
 
   //=======================
   // Repositories
   //=======================
   sl.registerLazySingleton<HomeRepository>(
       () => HomeRepositoryImpl(remoteDataSource: sl(), localDataSource: sl()));
+  sl.registerLazySingleton<DetailRepository>(() =>
+      DetailRepositoryImpl(remoteDataSource: sl(), localDataSource: sl()));
 
   //=======================
   // DataSource
   //=======================
-  sl.registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeRemoteDataSourceImpl(centerApi: sl()));
   sl.registerLazySingleton<HomeLocalDataSource>(
       () => HomeLocalDataSourceImpl(storage: sl()));
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(centerApi: sl()));
+  sl.registerLazySingleton<DetailLocalDataSource>(
+      () => DetailLocalDataSourceImpl(storage: sl()));
+  sl.registerLazySingleton<DetailRemoteDataSource>(
+      () => DetailRemoteDataSourceImpl(centerApi: sl()));
 
   //=======================
   // Network
@@ -47,4 +61,5 @@ init() {
   //=======================
   // Services
   //=======================
+  sl.registerLazySingleton<CacheManager>(() => DefaultCacheManager());
 }

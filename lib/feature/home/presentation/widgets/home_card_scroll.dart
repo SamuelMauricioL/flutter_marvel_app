@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_marvel_app/core/widgets/marvel_card.dart';
+import 'package:flutter_marvel_app/core/widgets/marvel_network_image.dart';
 import 'package:flutter_marvel_app/feature/home/domain/entities/hero_entity.dart';
 
 class HomeCardScroll extends StatelessWidget {
@@ -54,81 +56,61 @@ class HomeCardScroll extends StatelessWidget {
               bottom: padding + verticalInset * max(-delta, 0.0),
               start: start,
               textDirection: TextDirection.rtl,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        offset: Offset(3.0, 6.0),
-                        blurRadius: 10.0,
-                      )
-                    ],
-                  ),
-                  child: AspectRatio(
-                    aspectRatio: cardAspectRatio,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: <Widget>[
-                        Image.network(heroes[i].imageUrl, fit: BoxFit.cover),
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 8.0),
-                                child: Text(heroes[i].name,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25.0,
-                                        fontFamily: "SF-Pro-Text-Regular")),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 8.0),
-                                child: Text(heroes[i].description,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15.0,
-                                        fontFamily: "SF-Pro-Text-Regular")),
-                              ),
-                              const SizedBox(height: 10.0),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 12.0,
-                                  bottom: 12.0,
-                                ),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    print('=============> ${heroes[i].id}');
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 22.0,
-                                      vertical: 6.0,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.redAccent,
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: const Text(
-                                      "See more",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
+              child: MarvelCard(
+                aspectRatio: cardAspectRatio,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: <Widget>[
+                    MarvelNetworkImage(imageUrl: heroes[i].imageUrl),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                            child: Text(heroes[i].name,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    fontFamily: "SF-Pro-Text-Regular")),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                            child: Text(heroes[i].description,
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.0,
+                                    fontFamily: "SF-Pro-Text-Regular")),
+                          ),
+                          const SizedBox(height: 10.0),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              left: 12.0,
+                              bottom: 12.0,
+                            ),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 22.0,
+                                vertical: 6.0,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.redAccent,
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: const Text(
+                                "See more",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             );
