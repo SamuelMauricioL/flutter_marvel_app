@@ -3,6 +3,7 @@ import 'package:flutter_marvel_app/core/theme/marvel_text_style.dart';
 import 'package:flutter_marvel_app/core/widgets/marvel_card.dart';
 import 'package:flutter_marvel_app/core/widgets/marvel_network_image.dart';
 import 'package:flutter_marvel_app/feature/detail/domain/entities/detail_entity.dart';
+import 'package:flutter_marvel_app/feature/detail/presentation/widgets/detail_modal_bottom_sheet_comic.dart';
 
 class DetailCardSection extends StatelessWidget {
   final String title;
@@ -32,11 +33,18 @@ class DetailCardSection extends StatelessWidget {
                   itemBuilder: (context, i) {
                     return Row(
                       children: [
-                        MarvelCard(
-                          aspectRatio: 9.0 / 16.0,
-                          borderRadiusCircular: 10,
-                          child:
-                              MarvelNetworkImage(imageUrl: detail[i].imageUrl),
+                        GestureDetector(
+                          onTap: () => detailModalBottonSheetComic(
+                            context,
+                            detail[i],
+                          ),
+                          child: MarvelCard(
+                            aspectRatio: 9.0 / 16.0,
+                            borderRadiusCircular: 10,
+                            child: MarvelNetworkImage(
+                              imageUrl: detail[i].imageUrl,
+                            ),
+                          ),
                         ),
                         const SizedBox(width: 15),
                       ],

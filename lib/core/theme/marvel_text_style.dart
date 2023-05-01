@@ -9,6 +9,13 @@ class MarvelTextStyle {
     height: 1.5,
   );
 
+  static TextStyle subtitle2 = const TextStyle(
+    color: Palette.neutralDark,
+    fontSize: 19,
+    fontWeight: FontWeight.bold,
+    height: 1.5,
+  );
+
   static TextStyle paragraph = const TextStyle(
     color: Palette.neutralDark,
     fontSize: 16,
