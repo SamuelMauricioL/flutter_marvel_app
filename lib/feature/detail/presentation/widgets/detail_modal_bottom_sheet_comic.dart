@@ -15,40 +15,44 @@ void detailModalBottonSheetComic(BuildContext context, DetailEntity detail) {
     builder: (context) {
       return SizedBox(
         height: 700,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 200,
-              width: 700,
-              child: MarvelNetworkImage(imageUrl: detail.imageUrl),
-            ),
-            Text(detail.title, style: MarvelTextStyle.subtitle2),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                children: [
-                  Text(
-                    detail.description,
-                    maxLines: 4,
-                    style: MarvelTextStyle.paragraph,
-                  ),
-                  const SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Precio', style: MarvelTextStyle.subtitle2),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '\$${detail.price}',
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 200,
+                width: 700,
+                child: MarvelNetworkImage(imageUrl: detail.imageUrl),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    Text(detail.title, style: MarvelTextStyle.subtitle2),
+                    const SizedBox(height: 10),
+                    Text(
+                      detail.description,
+                      maxLines: 4,
                       style: MarvelTextStyle.paragraph,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Precio', style: MarvelTextStyle.subtitle2),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '\$${detail.price}',
+                        style: MarvelTextStyle.paragraph,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 100),
+            ],
+          ),
         ),
       );
     },
